@@ -264,11 +264,10 @@ final class LaravelHttpServer implements HttpServer
         // Set the Host header to match the configured host for subdomain routing
         $configuredHost = Playwright::host();
         if ($configuredHost !== null) {
-            $hostHeader = sprintf('%s:%d', $configuredHost, $this->port);
-            $symfonyRequest->headers->set('Host', $hostHeader);
+            $symfonyRequest->headers->set('Host', $configuredHost);
             // Also set SERVER_NAME for Laravel routing
             $symfonyRequest->server->set('SERVER_NAME', $configuredHost);
-            $symfonyRequest->server->set('HTTP_HOST', $hostHeader);
+            $symfonyRequest->server->set('HTTP_HOST', $configuredHost);
         }
 
         $debug = config('app.debug');
